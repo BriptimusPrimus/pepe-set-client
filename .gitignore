@@ -31,3 +31,9 @@ node_modules
 
 # Optional REPL history
 .node_repl_history
+
+# Webpack bundle
+dist/bundle.js
+
+# Visual Studio Code files
+.vscode
