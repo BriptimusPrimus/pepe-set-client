@@ -1,0 +1,12 @@
+{
+  "backend_implementation": {
+    "module": "implementations/pepe_set_serv_back",
+    "api": {
+      "root": "pepe_set",
+      "auth_method": "user_auth_server_method",
+      "enroll_google_soft": "google_soft_auth",
+      "activate_google_auth": "activate_google_auth",
+      "login_google_auth": "authenticate_google_auth"
+    }
+  }
+}

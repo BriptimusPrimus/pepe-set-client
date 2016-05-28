@@ -3,6 +3,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import MainArea from './components/MainArea'; 
 
+import config from '../config/config';
+import pepeSetServ from './services/pepeSetServ';
+
 const data = [
   {
     id: '10027',
@@ -30,7 +33,17 @@ const data = [
   }
 ];
 
-ReactDOM.render(
-  <MainArea data={data}/>,
-  document.getElementById('app')
-);
+export default function startApp(environment) {
+  console.log('INITIATE APP');
+  console.log('environment:', environment);
+
+  const configuration = config(environment);
+  console.log('configuration', configuration);
+
+  const pepeSetService = pepeSetServ(configuration);
+
+  ReactDOM.render(
+    <MainArea data={data}/>,
+    document.getElementById('app')
+  );
+}

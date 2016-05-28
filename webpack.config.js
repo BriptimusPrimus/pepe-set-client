@@ -1,11 +1,14 @@
 var path = require('path');
 var webpack = require('webpack');
 
+var ENVIORONMENT = process.env.NODE_ENV;
+var entryFile = ENVIORONMENT === 'test' ? 'start_mock.js' : 'start_dev.js'
+
 module.exports = {
   entry: [
     'webpack-dev-server/client?http://localhost:8080',
     'webpack/hot/only-dev-server',
-    './src/index.jsx'
+    './src/' + entryFile
   ],
   output: {
     path: path.join(__dirname, 'dist'),
@@ -18,6 +21,10 @@ module.exports = {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         loader: 'react-hot!babel'
+      },
+      {
+        test: /\.json$/,
+        loader: 'json'
       },
       {
         test: /\.css$/,
