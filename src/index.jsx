@@ -1,12 +1,12 @@
 import Bootstrap from 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import MainArea from './components/MainArea'; 
+import MainArea from './containers/MainArea'; 
 
 import config from '../config/config';
 import pepeSetServ from './services/pepeSetServ';
 
-const data = [
+const tableData = [
   {
     id: '10027',
     keyName: 'Pepe uno',
@@ -43,7 +43,7 @@ export default function startApp(environment) {
   const pepeSetService = pepeSetServ(configuration);
 
   ReactDOM.render(
-    <MainArea data={data}/>,
+    <MainArea tableData={tableData}/>,
     document.getElementById('app')
   );
 }
