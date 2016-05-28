@@ -1,8 +1,13 @@
 import Bootstrap from 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import MainArea from './containers/MainArea'; 
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
 
+import reducer from './reducers'
+import {requestUserData} from './actions';
+
+import MainArea from './containers/MainArea'; 
 import config from '../config/config';
 import pepeSetServ from './services/pepeSetServ';
 
@@ -33,6 +38,8 @@ const tableData = [
   }
 ];
 
+let store = createStore(reducer)
+
 export default function startApp(environment) {
   console.log('INITIATE APP');
   console.log('environment:', environment);
@@ -46,4 +53,7 @@ export default function startApp(environment) {
     <MainArea tableData={tableData}/>,
     document.getElementById('app')
   );
+  
+  store.dispatch(requestUserData());
+  pepeSetService.fetch();
 }

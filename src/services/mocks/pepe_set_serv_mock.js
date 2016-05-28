@@ -5,5 +5,5 @@
 // }
 
 export function fetch() {
-  return 'fetch from mocks';
+  console.log('fetch from mocks');
 }

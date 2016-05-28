@@ -15,5 +15,5 @@ export default React.createClass({
         <div className="col-xs-0 col-sm-1 col-md-2"></div>
       </div>
     );
-  } 
+  }
 });

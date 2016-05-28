@@ -2,7 +2,7 @@ import {
   REQUEST_USER_DATA,
   RECEIVE_USER_DATA,
   SET_AUTHENTICATION_METHOD
-} from './actions';
+} from '../actions';
 
 const stateSample = {
   waitingForResponse: false,
@@ -26,7 +26,9 @@ const stateSample = {
 }
 
 const initialState = {
-  waitingForResponse: false
+  waitingForResponse: false, 
+  userData: {}, 
+  activationData: {}
 }
 
 function waitingForResponse(state=false, action) {
