@@ -85,7 +85,7 @@ module.exports = function serviceFactory(configuration) {
         } else {
           resolve(response);
         }
-      }, 2000);
+      }, configuration.mockResponseMiliseconds);
     });
   }
   
@@ -122,7 +122,7 @@ module.exports = function serviceFactory(configuration) {
         } else {
           resolve(response);
         }
-      }, 2000);
+      }, configuration.mockResponseMiliseconds);
     });    
   }
 

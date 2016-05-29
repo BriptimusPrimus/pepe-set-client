@@ -1,6 +1,6 @@
 import React from 'react';
-import DataTable from '../components/table/DataTable';
 import {constants} from '../lib/constants';
+import EnrollmentFormGoogleAuth from './EnrollmentFormGoogleAuth';
 
 export default React.createClass({
 
@@ -26,7 +26,7 @@ export default React.createClass({
         if (activationData.uri) {
           if (activationData.type === constants.authTypes.GOOGLE_AUTH) {
             return (
-              <div>SET GOOGLE AUTHENTICATOR. Scan the image, enter the code</div>
+              <EnrollmentFormGoogleAuth/>
             );
           }
           if (activationData.type === constants.authTypes.U2F) {
@@ -94,7 +94,7 @@ export default React.createClass({
   render: function() {
     return(
       <div>
-        {this.props.waitingForResponse ? <div>LOADING...</div> : <p>done</p>}
+        {this.props.waitingForResponse ? <div>LOADING...</div> : <p></p>}
         <p>{JSON.stringify(this.props)}</p>
         {this.renderScreen(this.props)}
       </div>
