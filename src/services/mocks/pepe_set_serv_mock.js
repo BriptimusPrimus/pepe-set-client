@@ -88,12 +88,51 @@ module.exports = function serviceFactory(configuration) {
       }, 2000);
     });
   }
+  
+  function getGoogleSoftAuth() {
+    console.log('mock request to getGoogleSoftAuth');
+
+    function mockRequest() {
+      const session_token = getSessionToken();
+      console.log('mock response from getGoogleSoftAuth, ', 'sessionToken =', session_token);
+
+      if (session_token === 'type_basic') {
+        return {
+          activationData: {
+            nonce: 23,
+            id: 999,
+            secret: 'secret',
+            uri: '/some/uri',
+            type: 'google_auth'
+          }
+        }
+      } else {
+        //error case
+        return {
+          error: 'invalid session token'
+        };        
+      }          
+    }
+    
+    return new Promise(function(resolve, reject) {
+      setTimeout(function() {
+        const response = mockRequest();
+        if (!response || response.error) {
+          reject(response);
+        } else {
+          resolve(response);
+        }
+      }, 2000);
+    });    
+  }
 
   // This object implements the bridge interface:
   // interface: {
   //   getUserAuthMethod: function(){}
+  //   getGoogleSoftAuth: function(){}
   // }
   return {
-    getUserAuthMethod
+    getUserAuthMethod,
+    getGoogleSoftAuth
   }
 }

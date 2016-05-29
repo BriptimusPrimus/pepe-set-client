@@ -7,6 +7,7 @@ module.exports = function serviceFactory(configuration) {
   // This object implements the bridge interface:
   // interface: {
   //   getUserAuthMethod: function(){}
+  //   getGoogleSoftAuth: function(){}  
   // }
   return {
     getUserAuthMethod

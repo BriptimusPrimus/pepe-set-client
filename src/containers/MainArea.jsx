@@ -1,8 +1,9 @@
 import React from 'react';
-import MainContainer from './MainContainer'
+import MainContainerFactory from './MainContainer'
 
 export default React.createClass({
   render: function() {
+    const MainContainer = MainContainerFactory(this.props.pepeSetService);
     return(
       <div className="panel panel-default row">
         <div className="col-xs-0 col-sm-1 col-md-2"></div>

@@ -1,7 +1,8 @@
 import {
   REQUEST_USER_DATA,
   RECEIVE_USER_DATA,
-  SET_AUTHENTICATION_METHOD
+  SET_AUTHENTICATION_METHOD,
+  RECEIVE_ACTIVATION_DATA
 } from '../actions';
 
 const stateSample = {
@@ -39,6 +40,8 @@ function waitingForResponse(state=false, action) {
       return true
     case RECEIVE_USER_DATA:
       return false
+    case RECEIVE_ACTIVATION_DATA:
+      return false
     default:
       return state
   }
@@ -55,6 +58,8 @@ function userData(state={}, action) {
 
 function activationData(state={}, action) {
   switch (action.type){
+    case RECEIVE_ACTIVATION_DATA:
+      return action.activationData
     default:
       return state
   }

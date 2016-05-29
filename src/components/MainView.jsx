@@ -41,7 +41,12 @@ export default React.createClass({
           return (
             <div>
               <div>
-                <button class="btn btn-primary">Activate Google Authenticator</button>
+                <button 
+                  class="btn btn-primary"
+                  onClick={() => props.onSetGoogleAuthClick()}
+                >
+                  Activate Google Authenticator
+                </button>
               </div>
               <div>
                 <button class="btn btn-primary">Activate UB Key</button>
