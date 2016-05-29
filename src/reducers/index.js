@@ -34,6 +34,7 @@ const initialState = {
 function waitingForResponse(state=false, action) {
   switch(action.type) {
     case REQUEST_USER_DATA:
+      return true
     case SET_AUTHENTICATION_METHOD:
       return true
     case RECEIVE_USER_DATA:

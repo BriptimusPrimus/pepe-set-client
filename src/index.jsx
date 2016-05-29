@@ -49,7 +49,9 @@ export default function startApp(environment) {
   const pepeSetService = pepeSetServ(configuration);
 
   ReactDOM.render(
-    <MainArea tableData={tableData}/>,
+    <Provider store={store}>
+      <MainArea tableData={tableData}/>
+    </Provider>,
     document.getElementById('app')
   );
   
