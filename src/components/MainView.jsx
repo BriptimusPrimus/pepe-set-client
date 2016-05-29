@@ -4,6 +4,7 @@ import {constants} from '../lib/constants';
 import EnrollmentFormGoogleAuth from './EnrollmentFormGoogleAuth';
 import AuthMethodSelection from './AuthMethodSelection';
 import LoginGoogleAuth from './LoginGoogleAuth';
+import AccountOverview from './AccountOverview';
 
 export default React.createClass({
 
@@ -43,14 +44,10 @@ export default React.createClass({
       // Fully logged in 2FA user
       } else {
         if (userData.type === constants.authTypes.GOOGLE_AUTH) {
-          return (
-            <div>Your current authentication method is set to Google Authenticator</div>
-          );
+          return <AccountOverview authMethod={constants.authTypes.GOOGLE_AUTH}/>          
         }
         if (userData.type === constants.authTypes.U2F) {
-          return (
-            <div>Your current authentication method is set to UB Key</div>
-          )
+          return <AccountOverview authMethod={constants.authTypes.U2F}/>         
         }
         // unknown 2FA authentication method...going to default case
       }
