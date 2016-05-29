@@ -1,12 +1,14 @@
 import React from 'react';
 import {constants} from '../lib/constants';
+
 import EnrollmentFormGoogleAuth from './EnrollmentFormGoogleAuth';
+import AuthMethodSelection from './AuthMethodSelection';
 
 export default React.createClass({
 
   renderScreen: function (props) {
     console.log(props);
-    const {waitingForResponse, userData, activationData} = props;
+    const {waitingForResponse, userData, activationData} = props;    
     
     if(waitingForResponse) {
       return;    
@@ -16,7 +18,7 @@ export default React.createClass({
       return(
         <div>ERROR: {userData.error}</div>
       );
-    }
+    }    
 
     if (userData.isFullyLoggedIn) {
             
@@ -37,22 +39,8 @@ export default React.createClass({
           // unknown 2FA authentication method...going to default case
 
         // not 2FA user, no activation intent, show Account Overview
-        } else {          
-          return (
-            <div>
-              <div>
-                <button 
-                  class="btn btn-primary"
-                  onClick={() => props.onSetGoogleAuthClick()}
-                >
-                  Activate Google Authenticator
-                </button>
-              </div>
-              <div>
-                <button class="btn btn-primary">Activate UB Key</button>
-              </div>
-            </div>
-          );
+        } else {
+          return <AuthMethodSelection onSetGoogleAuthClick={props.onSetGoogleAuthClick}/>          
         }
         
       // Fully logged in 2FA user

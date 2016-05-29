@@ -26,8 +26,7 @@ export default function MainContainerFactory(pepeSetService) {
 
   const mapDispatchToProps = (dispatch) => {
     return {
-      onSetGoogleAuthClick: () => {
-        console.log('onSetGoogleAuthClick');
+      onSetGoogleAuthClick: () => {        
         dispatch(setAuthenticationMethod(constants.authTypes.GOOGLE_AUTH));
         getGoogleActivationData(dispatch);
       },
