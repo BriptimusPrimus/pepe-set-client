@@ -11,7 +11,6 @@ export default class AuthMethodSelection extends React.Component {
   render() {
     return(
       <form name="enrollment">
-        <p>{JSON.stringify(this.props)}</p>
         <div className="form-group">
           <button 
             type="submit"

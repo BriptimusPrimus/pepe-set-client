@@ -63,7 +63,9 @@ function userData(state={}, action) {
     case ACTIVATE_GOOGLE_AUTH_SUCCESS:
       return action.userData
     case ACTIVATE_GOOGLE_AUTH_ERROR:
-      return action.error
+      return Object.assign({}, state, {
+        errorNotification: action.error.error
+      })
     default:
       return state
   }
@@ -76,7 +78,7 @@ function activationData(state={}, action) {
     case ACTIVATE_GOOGLE_AUTH_SUCCESS:
       return {}
     case ACTIVATE_GOOGLE_AUTH_ERROR:
-      return {}
+      return state
     default:
       return state
   }

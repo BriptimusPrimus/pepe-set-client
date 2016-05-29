@@ -29,7 +29,10 @@ export default React.createClass({
         // there could be google auth or U2F activation intent
         if (activationData.uri) {
           if (activationData.type === constants.authTypes.GOOGLE_AUTH) {
-            return <EnrollmentFormGoogleAuth onActivateGoogleAuthClick={props.onActivateGoogleAuthClick}/>
+            return <EnrollmentFormGoogleAuth 
+              onActivateGoogleAuthClick={props.onActivateGoogleAuthClick}
+              errNotification={userData.errorNotification}
+            />
           }
           if (activationData.type === constants.authTypes.U2F) {
             return <div>SET UB Key. Wait for your UB key to respond</div>            

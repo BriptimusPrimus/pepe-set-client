@@ -125,14 +125,49 @@ module.exports = function serviceFactory(configuration) {
       }, configuration.mockResponseMiliseconds);
     });    
   }
+  
+  function postActivateGoogleAuth(otpCode) {
+    console.log('mock request to postActivateGoogleAuth');
+    
+    function mockRequest() {
+      console.log('mock response from postActivateGoogleAuth, ', 'otpCode =', otpCode);
+      
+      if(otpCode === '111111') {
+        return {
+          userData: {
+            type: 'google_auth',
+            is2fa: true,
+            isFullyLoggedIn: true
+          }          
+        } 
+      } else {
+        return {
+          error: 'Invalid OTP Code'  
+        }
+      }
+    }
+    
+    return new Promise(function(resolve, reject) {
+      setTimeout(function() {
+        const response = mockRequest();
+        if (!response || response.error) {
+          reject(response);
+        } else {
+          resolve(response);
+        }
+      }, configuration.mockResponseMiliseconds);
+    });      
+  }
 
   // This object implements the bridge interface:
   // interface: {
   //   getUserAuthMethod: function(){}
   //   getGoogleSoftAuth: function(){}
+  //   postActivateGoogleAuth: function(){}
   // }
   return {
     getUserAuthMethod,
-    getGoogleSoftAuth
+    getGoogleSoftAuth,
+    postActivateGoogleAuth
   }
 }
