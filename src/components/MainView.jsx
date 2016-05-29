@@ -3,6 +3,7 @@ import {constants} from '../lib/constants';
 
 import EnrollmentFormGoogleAuth from './EnrollmentFormGoogleAuth';
 import AuthMethodSelection from './AuthMethodSelection';
+import LoginGoogleAuth from './LoginGoogleAuth';
 
 export default React.createClass({
 
@@ -27,14 +28,10 @@ export default React.createClass({
         // there could be google auth or U2F activation intent
         if (activationData.uri) {
           if (activationData.type === constants.authTypes.GOOGLE_AUTH) {
-            return (
-              <EnrollmentFormGoogleAuth/>
-            );
+            return <EnrollmentFormGoogleAuth onActivateGoogleAuthClick={props.onActivateGoogleAuthClick}/>
           }
           if (activationData.type === constants.authTypes.U2F) {
-            return (
-              <div>SET UB Key. Wait for your UB key to respond</div>
-            );
+            return <div>SET UB Key. Wait for your UB key to respond</div>            
           }
           // unknown 2FA authentication method...going to default case
 
@@ -62,13 +59,11 @@ export default React.createClass({
     } else {
       if (userData.type === constants.authTypes.GOOGLE_AUTH) {
         return (
-          <div>Log in using Google Authenticator</div>
+          <LoginGoogleAuth onGoogleAuthLoginClick={props.onGoogleAuthLoginClick}/>
         );
       }
       if (userData.type === constants.authTypes.U2F) {
-        return (
-          <div>Log in using your UB Key</div>
-        );
+        return <div>Log in using your UB Key</div>
       }
       // unknown 2FA authentication method...going to default case      
     }
