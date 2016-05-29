@@ -27,7 +27,7 @@ const stateSample = {
 
 const initialState = {
   waitingForResponse: false, 
-  userData: {}, 
+  userData: {},
   activationData: {}
 }
 

@@ -7,6 +7,16 @@ export default React.createClass({
   renderScreen: function (props) {
     console.log(props);
     const {waitingForResponse, userData, activationData} = props;
+    
+    if(waitingForResponse) {
+      return;    
+    }
+    
+    if(userData.error) {
+      return(
+        <div>ERROR: {userData.error}</div>
+      );
+    }
 
     if (userData.isFullyLoggedIn) {
             

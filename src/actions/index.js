@@ -26,6 +26,6 @@ export function receiveUserData(userData) {
 export function setAuthenticationMethod(method) {
   return {
     type: SET_AUTHENTICATION_METHOD,
-    meth
+    method
   }
 }

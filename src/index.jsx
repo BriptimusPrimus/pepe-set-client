@@ -66,6 +66,7 @@ export default function startApp(environment) {
       console.log('state:', store.getState());
     })
     .catch(function rejected(reason) {
+      store.dispatch(receiveUserData(reason));
       console.log('response error:', reason);
       console.log('state:', store.getState());
     })

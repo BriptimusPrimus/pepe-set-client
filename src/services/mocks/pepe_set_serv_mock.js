@@ -2,10 +2,6 @@ import {getSessionToken} from '../../lib/utils';
 
 module.exports = function serviceFactory(configuration) {
 
-  function fetch() {
-    console.log('fetch from mocks');
-  }
-
   function getUserAuthMethod() {
     console.log('mock request to getUserAuthMethod');
 
@@ -25,7 +21,7 @@ module.exports = function serviceFactory(configuration) {
         return {
           userData: {
             type: 'google_auth',
-            is2fa: false,
+            is2fa: true,
             isFullyLoggedIn: false,
             authData: {
               nonce: 1,
@@ -35,6 +31,44 @@ module.exports = function serviceFactory(configuration) {
             }
           }
         }
+      } else if (session_token === 'type_u2f') {
+        return {
+          userData: {
+            type: 'u2f',
+            is2fa: true,
+            isFullyLoggedIn: false,
+            authData: {
+              nonce: 2,
+              id: 456,
+              secret: 'secret',
+              uri: '/some/uri'
+            }
+          }
+        }
+      } else if (session_token === 'type_unknown') {
+        return {
+          userData: {
+            type: 'unknown',
+            is2fa: true,
+            isFullyLoggedIn: false
+          }
+        }
+      } else if (session_token === 'loggedin_google_auth') {
+        return {
+          userData: {
+            type: 'google_auth',
+            is2fa: true,
+            isFullyLoggedIn: true
+          }
+        }
+      } else if (session_token === 'loggedin_u2f') {
+        return {
+          userData: {
+            type: 'u2f',
+            is2fa: true,
+            isFullyLoggedIn: true
+          }
+        }                
       } else {
         //error case
         return {
@@ -57,11 +91,9 @@ module.exports = function serviceFactory(configuration) {
 
   // This object implements the bridge interface:
   // interface: {
-  //   fetch: function(){}
   //   getUserAuthMethod: function(){}
   // }
   return {
-    fetch,
     getUserAuthMethod
   }
 }
