@@ -5,7 +5,7 @@ import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 
 import reducer from './reducers'
-import {requestUserData} from './actions';
+import {requestUserData, receiveUserData} from './actions';
 
 import MainArea from './containers/MainArea'; 
 import config from '../config/config';
@@ -41,8 +41,7 @@ const tableData = [
 let store = createStore(reducer)
 
 export default function startApp(environment) {
-  console.log('INITIATE APP');
-  console.log('environment:', environment);
+  console.log('INITIATE APP environment:', environment);
 
   const configuration = config(environment);
   console.log('configuration', configuration);
@@ -54,6 +53,18 @@ export default function startApp(environment) {
     document.getElementById('app')
   );
   
+  // trigger initial request to the server
   store.dispatch(requestUserData());
-  pepeSetService.fetch();
+  
+  console.log('state:', store.getState());
+  
+  pepeSetService.getUserAuthMethod()
+    .then(function fullfilled(data) {
+      store.dispatch(receiveUserData(data.userData));
+      console.log('state:', store.getState());
+    })
+    .catch(function rejected(reason) {
+      console.log('response error:', reason);
+      console.log('state:', store.getState());
+    })
 }
