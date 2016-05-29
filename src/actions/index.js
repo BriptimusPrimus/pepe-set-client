@@ -11,6 +11,9 @@ export const RECEIVE_ACTIVATION_DATA = 'RECEIVE_ACTIVATION_DATA';
 export const ACTIVATE_GOOGLE_AUTH = 'ACTIVATE_GOOGLE_AUTH';
 export const ACTIVATE_GOOGLE_AUTH_SUCCESS = 'ACTIVATE_GOOGLE_AUTH_SUCCESS';
 export const ACTIVATE_GOOGLE_AUTH_ERROR = 'ACTIVATE_GOOGLE_AUTH_ERROR';
+export const AUTHENTICATE_GOOGLE_AUTH = 'AUTHENTICATE_GOOGLE_AUTH';
+export const AUTHENTICATE_GOOGLE_AUTH_SUCCESS = 'AUTHENTICATE_GOOGLE_AUTH_SUCCESS';
+export const AUTHENTICATE_GOOGLE_AUTH_ERROR = 'AUTHENTICATE_GOOGLE_AUTH_ERROR';
 // TODO: U2F here
 
 
@@ -61,6 +64,26 @@ export function activateGoogleAuthSuccess(userData) {
 export function activateGoogleAuthError(error) {
   return {
     type: ACTIVATE_GOOGLE_AUTH_ERROR,
+    error
+  }
+}
+
+export function authenticateGoogleAuth() {
+  return {
+    type: AUTHENTICATE_GOOGLE_AUTH
+  }
+}
+
+export function authenticateGoogleAuthSuccess(userData) {
+  return {
+    type: AUTHENTICATE_GOOGLE_AUTH_SUCCESS,
+    userData
+  }
+}
+
+export function authenticateGoogleAuthError(error) {
+  return {
+    type: AUTHENTICATE_GOOGLE_AUTH_ERROR,
     error
   }
 }

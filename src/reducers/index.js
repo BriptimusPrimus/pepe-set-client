@@ -5,7 +5,10 @@ import {
   RECEIVE_ACTIVATION_DATA,
   ACTIVATE_GOOGLE_AUTH,
   ACTIVATE_GOOGLE_AUTH_SUCCESS,
-  ACTIVATE_GOOGLE_AUTH_ERROR
+  ACTIVATE_GOOGLE_AUTH_ERROR,
+  AUTHENTICATE_GOOGLE_AUTH,
+  AUTHENTICATE_GOOGLE_AUTH_SUCCESS,
+  AUTHENTICATE_GOOGLE_AUTH_ERROR
 } from '../actions';
 
 const stateSample = {
@@ -51,6 +54,12 @@ function waitingForResponse(state=false, action) {
       return false
     case ACTIVATE_GOOGLE_AUTH_ERROR:
       return false
+    case AUTHENTICATE_GOOGLE_AUTH:
+      return true
+    case AUTHENTICATE_GOOGLE_AUTH_SUCCESS:
+      return false
+    case AUTHENTICATE_GOOGLE_AUTH_ERROR:
+      return false
     default:
       return state
   }
@@ -63,6 +72,12 @@ function userData(state={}, action) {
     case ACTIVATE_GOOGLE_AUTH_SUCCESS:
       return action.userData
     case ACTIVATE_GOOGLE_AUTH_ERROR:
+      return Object.assign({}, state, {
+        errorNotification: action.error.error
+      })
+    case AUTHENTICATE_GOOGLE_AUTH_SUCCESS:
+      return action.userData
+    case AUTHENTICATE_GOOGLE_AUTH_ERROR:
       return Object.assign({}, state, {
         errorNotification: action.error.error
       })

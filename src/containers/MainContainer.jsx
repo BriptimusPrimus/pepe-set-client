@@ -7,6 +7,9 @@ import {
   activateGoogleAuth,
   activateGoogleAuthSuccess,
   activateGoogleAuthError,
+  authenticateGoogleAuth,
+  authenticateGoogleAuthSuccess,
+  authenticateGoogleAuthError
 } from '../actions';
 
 export default function MainContainerFactory(pepeSetService) {
@@ -32,6 +35,17 @@ export default function MainContainerFactory(pepeSetService) {
         dispatch(activateGoogleAuthError(reason));
       })
   }
+  
+  const googleAuthLoginHandler = (dispatch, otpCode) => {
+    pepeSetService.postAuthenticateGoogleAuth(otpCode)
+      .then(function fullfilled(data) {        
+        dispatch(authenticateGoogleAuthSuccess(data.userData));
+      })
+      .catch(function rejected(reason) {
+        console.log('response error:', reason);
+        dispatch(authenticateGoogleAuthError(reason));
+      })
+  }
 
   const mapStateToProps = (state) => {
     return {
@@ -43,17 +57,20 @@ export default function MainContainerFactory(pepeSetService) {
 
   const mapDispatchToProps = (dispatch) => {
     return {
-      onSetGoogleAuthClick: () => {        
+      onSetGoogleAuthClick: () => {
+        console.log('onSetGoogleAuthClick');        
         dispatch(setAuthenticationMethod(constants.authTypes.GOOGLE_AUTH));
         getGoogleActivationDataHandler(dispatch);
       },
       onActivateGoogleAuthClick: (otpCode) => {
-        console.log('onActivateGoogleAuthClick');
+        console.log('onActivateGoogleAuthClick, otpCode=', otpCode);
         dispatch(activateGoogleAuth());
         activateGoogleAuthHandler(dispatch, otpCode);
       },
-      onGoogleAuthLoginClick: () => {
-        console.log('onGoogleAuthLoginClick');
+      onGoogleAuthLoginClick: (otpCode) => {
+        console.log('onGoogleAuthLoginClick, otpCode=', otpCode);
+        dispatch(authenticateGoogleAuth());
+        googleAuthLoginHandler(dispatch, otpCode);
       }
     }
   }

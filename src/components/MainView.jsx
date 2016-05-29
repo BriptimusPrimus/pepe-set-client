@@ -58,9 +58,10 @@ export default React.createClass({
     // not logged in user, show 2FA screen       
     } else {
       if (userData.type === constants.authTypes.GOOGLE_AUTH) {
-        return (
-          <LoginGoogleAuth onGoogleAuthLoginClick={props.onGoogleAuthLoginClick}/>
-        );
+        return <LoginGoogleAuth 
+          onGoogleAuthLoginClick={props.onGoogleAuthLoginClick}
+          errNotification={userData.errorNotification}
+        />        
       }
       if (userData.type === constants.authTypes.U2F) {
         return <div>Log in using your UB Key</div>
