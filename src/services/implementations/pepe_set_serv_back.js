@@ -28,6 +28,7 @@ module.exports = function serviceFactory(configuration) {
           return response.json();
         })
         .then(function(data) {
+          console.log('SERVER RESPONSE DATA:', data);
           if(data.error) {
             reject(data);
           } else {

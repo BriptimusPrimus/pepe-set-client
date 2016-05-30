@@ -16,9 +16,10 @@ export default React.createClass({
       return;    
     }
     
-    if(userData.error) {
+    const errorInState = userData.error || activationData.error;
+    if(errorInState) {
       return(
-        <div>ERROR: {userData.error}</div>
+        <div>ERROR: {errorInState}</div>
       );
     }    
 

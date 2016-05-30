@@ -27,7 +27,7 @@ export default function MainContainerFactory(pepeSetService) {
   
   const activateGoogleAuthHandler = (dispatch, otpCode) => {
     pepeSetService.postActivateGoogleAuth(otpCode)
-      .then(function fullfilled(data) {        
+      .then(function fullfilled(data) {
         dispatch(activateGoogleAuthSuccess(data.userData));
       })
       .catch(function rejected(reason) {
