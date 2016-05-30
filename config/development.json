@@ -2,6 +2,9 @@
   "backend_implementation": {
     "module": "implementations/pepe_set_serv_back",
     "api": {
+      "protocol": "http",
+      "host": "localhost",
+      "port": "3000",
       "root": "hackauth",
       "auth_method": "user_auth_server_method",
       "enroll_google_soft": "google_soft_auth",
