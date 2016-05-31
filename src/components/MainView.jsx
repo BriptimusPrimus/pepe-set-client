@@ -80,7 +80,7 @@ export default React.createClass({
     return(
       <div>
         {this.props.waitingForResponse ? <div>LOADING...</div> : <p></p>}
-        <p>{JSON.stringify(this.props)}</p>
+        {/*<p>{JSON.stringify(this.props)}</p>*/}
         {this.renderScreen(this.props)}
       </div>
     );
