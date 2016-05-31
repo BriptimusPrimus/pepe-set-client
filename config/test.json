@@ -2,5 +2,5 @@
   "backend_implementation": {
     "module": "mocks/pepe_set_serv_mock"
   },
-  "mockResponseMiliseconds": 500
+  "mockResponseMiliseconds": 100
 }

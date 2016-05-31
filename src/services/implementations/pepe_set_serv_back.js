@@ -40,38 +40,6 @@ module.exports = function serviceFactory(configuration) {
             error: 'Service Failure'
           });
         });
-
-      // uncomment to test currencyConversion API http://localhost:3333/symbols
-      // or http://localhost:3000/hackauth/user_auth_server_method
-      // fetch('http://localhost:3333/symbols', requestConf)
-      //   .then(function(response) {
-      //     console.log('TEST GET REQUEST 0');
-      //     // if (response.status !== 200) {
-      //     //   return {
-      //     //     error: 'Service Failure XXX',
-      //     //     status: response.status
-      //     //   }
-      //     // }
-      //     console.log('currencyConversion response:', response);
-      //     console.log('TEST GET REQUEST 1');
-      //     return response.json();
-      //   })
-      //   .then(function(data) {
-      //     console.log('TEST GET REQUEST 2');
-      //     console.log('currencyConversion data:', JSON.stringify(data));
-      //     alert(JSON.stringify(data));
-      //     if(data.error) {
-      //       reject(data);
-      //     } else {
-      //       resolve(data);
-      //     }
-      //   })
-      //   .catch(function(reason) {
-      //     reject({
-      //       error: 'Service Failure XXX'
-      //     });
-      //   });
-
     }
 
     return new Promise(function(resolve, reject) {
@@ -79,11 +47,12 @@ module.exports = function serviceFactory(configuration) {
     });
   }
 
-  function postRequest(enpoint, data) {
+  function postRequest(endpoint, data) {
     function makeRequest(resolve, reject) {
       const requestConf = {
         method: 'POST',
         mode: 'cors',
+        credentials: 'include',
         headers: new Headers({
           'Content-Type': 'application/json'
         }),
@@ -134,18 +103,18 @@ module.exports = function serviceFactory(configuration) {
     return getRequest(endpoint);
   }
 
-  function postActivateGoogleAuth() {
+  function postActivateGoogleAuth(otpCode) {
     console.log('postActivateGoogleAuth from dev implementation');
     const endpoint = apiEndpoint
       + configuration.backend_implementation.api.activate_google_auth;
-    return postRequest(endpoint);
+    return postRequest(endpoint, {otp: otpCode});
   }
 
-  function postAuthenticateGoogleAuth() {
+  function postAuthenticateGoogleAuth(otpCode) {
     console.log('postAuthenticateGoogleAuth from dev implementation');
     const endpoint = apiEndpoint
       + configuration.backend_implementation.api.login_google_auth;
-    return postRequest(endpoint);
+    return postRequest(endpoint, {otp: otpCode});
   }
 
 
